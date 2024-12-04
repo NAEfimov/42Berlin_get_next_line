@@ -6,7 +6,7 @@
 /*   By: nefimov <nefimov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 13:44:12 by nefimov           #+#    #+#             */
-/*   Updated: 2024/12/04 13:57:27 by nefimov          ###   ########.fr       */
+/*   Updated: 2024/12/04 16:51:54 by nefimov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,12 @@
 #include <stdio.h>    // For perror()
 #include "get_next_line.h"
 
-int	main(int argc, char *argv[])
+int	main(void)
 {
 	int		fd;
 	char	*str;
 
-	if (argc != 2)
-		return (1);
-	fd = open(argv[1], O_RDONLY);
+	fd = open("test", O_RDONLY);
 	if (fd == -1)
 		return (1);
 	str = get_next_line(fd);
