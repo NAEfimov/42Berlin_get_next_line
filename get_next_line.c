@@ -6,7 +6,7 @@
 /*   By: nefimov <nefimov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 13:11:59 by nefimov           #+#    #+#             */
-/*   Updated: 2024/12/05 10:14:02 by nefimov          ###   ########.fr       */
+/*   Updated: 2024/12/05 18:13:25 by nefimov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*get_next_line(int fd)
 	
 	if (fd < 0)
 		return (NULL);
-	str = ft_calloc(0, 1);
+	str = ft_calloc(1, 1);
 	
 	i = 0;
 	while (buff[i] == 0 && i < BUFFER_SIZE)
@@ -31,7 +31,10 @@ char	*get_next_line(int fd)
 	{
 		rd = read(fd, buff, BUFFER_SIZE);
 		if (rd == -1 || rd == 0)
+		{
+			free(str);
 			return (NULL);
+		}
 		i = 0;
 	}
 	start = i;
@@ -44,13 +47,16 @@ char	*get_next_line(int fd)
 		str = ft_strljoin(str, &buff[start], BUFFER_SIZE - start);
 		rd = read(fd, buff, BUFFER_SIZE);
 		if (rd == -1 || rd == 0)
+		{
+			free(str);			
 			return (NULL);
+		}
 		i = 0;
 		start = i;
 		}
 		// else
 		// 	i++;
 	}
-	str = ft_strljoin(str, buff, (i - start + 1));
+	str = ft_strljoin(str, &buff[start], (i - start + 1));
 	return (str);
 }
