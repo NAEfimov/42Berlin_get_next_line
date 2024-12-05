@@ -6,7 +6,7 @@
 /*   By: nefimov <nefimov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 13:44:12 by nefimov           #+#    #+#             */
-/*   Updated: 2024/12/04 16:51:54 by nefimov          ###   ########.fr       */
+/*   Updated: 2024/12/05 09:58:46 by nefimov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(void)
 	while (str)
 	{
 		printf("%s", str);
+		free(str);
 		str = get_next_line(fd);
 	}
 	close(fd);

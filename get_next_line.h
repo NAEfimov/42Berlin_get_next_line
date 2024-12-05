@@ -6,7 +6,7 @@
 /*   By: nefimov <nefimov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 13:12:24 by nefimov           #+#    #+#             */
-/*   Updated: 2024/12/04 16:36:05 by nefimov          ###   ########.fr       */
+/*   Updated: 2024/12/05 09:29:54 by nefimov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 5
 # endif
 # include <unistd.h>
 # include <stdlib.h>
@@ -25,5 +25,8 @@ size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+
+char	*ft_strljoin(char *s1, char *s2, size_t size);
+void    *ft_calloc(size_t nmemb, size_t size);
 
 #endif
