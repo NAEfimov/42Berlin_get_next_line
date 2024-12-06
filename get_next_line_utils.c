@@ -6,13 +6,19 @@
 /*   By: nefimov <nefimov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:13:23 by nefimov           #+#    #+#             */
-/*   Updated: 2024/12/06 13:00:52 by nefimov          ###   ########.fr       */
+/*   Updated: 2024/12/06 15:14:11 by nefimov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
 #include "get_next_line.h"
 
+/* 
+	Calculate a length of the string.
+	
+	INPUT: C string "s"
+	RETURN: number of characters in string "s"
+*/
 size_t	ft_strlen(const char *s)
 {
 	size_t	len;
@@ -25,34 +31,43 @@ size_t	ft_strlen(const char *s)
 	return (len);
 }
 
+/*
+	Create a new string, that is a result of concatination of string 's1'
+	and 'size' bites of string 's2'. Set copied bytes of 's2' to '\0'.
+	Free allocated memory of string 's1' in the end.
+
+	INPUT: strings 's1', 's2' and number of bytes 'size' to copy from 's2'
+	RETURN: string 's' or NULL if error
+*/
 char	*ft_strljoin(char *s1, char *s2, size_t size)
 {
-	char	*fd;
-	char	*str;
+	char	*s;
+	char	*s_iter;
 	char	*s1_to_free;
 
 	s1_to_free = s1;
-	fd = (char *) malloc((ft_strlen(s1) + size + 1) * sizeof(char));
-	if (fd == NULL)
+	s = (char *) malloc((ft_strlen(s1) + size + 1) * sizeof(char));
+	if (s == NULL)
 		return (NULL);
-	str = fd;
+	s_iter = s;
 	while (*s1)
 	{
-		*str++ = *s1;
+		*s_iter++ = *s1;
 		s1++;
 	}
 	while (size > 0)
 	{
-		*str++ = *s2;
+		*s_iter++ = *s2;
 		*s2 = '\0';
 		s2++;
 		size--;
 	}
-	*str = '\0';
+	*s_iter = '\0';
 	free(s1_to_free);
-	return (fd);
+	return (s);
 }
 
+/* 	Create a zero string or NULL if error */
 char	*alloc_zero(void)
 {
 	char	*p;
@@ -64,6 +79,15 @@ char	*alloc_zero(void)
 	return (p);
 }
 
+/*
+	Return index of the first non '\0' element in char array 'buff'.
+	If all elements are '\0' make a new read. 
+
+
+	INPUT:  char buffer 'buff' of size BUFFER_SIZE and file descriptor 'fd'.
+	RETURN: index 'i' of the first non '\0' element in char array 'buff'
+			or '-1' if error or end of the file was reached.
+*/
 int	check_init_buff(char *buff, ssize_t	fd)
 {
 	ssize_t	i;
@@ -84,6 +108,15 @@ int	check_init_buff(char *buff, ssize_t	fd)
 	return (i);
 }
 
+/*
+	Read a next line from the file descriptor <fd>.
+	Keep readed buffer in static var <buff>.
+
+	INPUT:  index <i> of first element to read in <buff>;
+		    file descriptor <fd>. 
+	RETURN: readed string <str> or NULL in cause of error,
+		    or if the end of the file was reached.
+*/
 char	*read_new_line(ssize_t	i, char *buff, ssize_t	fd)
 {
 	char	*str;
