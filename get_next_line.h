@@ -6,7 +6,7 @@
 /*   By: nefimov <nefimov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 13:12:24 by nefimov           #+#    #+#             */
-/*   Updated: 2024/12/05 09:29:54 by nefimov          ###   ########.fr       */
+/*   Updated: 2024/12/06 11:07:10 by nefimov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 5
+#  define BUFFER_SIZE 1
 # endif
 # include <unistd.h>
 # include <stdlib.h>
