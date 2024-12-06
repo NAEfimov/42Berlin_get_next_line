@@ -6,7 +6,7 @@
 /*   By: nefimov <nefimov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 13:44:12 by nefimov           #+#    #+#             */
-/*   Updated: 2024/12/06 11:09:34 by nefimov          ###   ########.fr       */
+/*   Updated: 2024/12/06 13:01:09 by nefimov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	main(void)
 	char	*str;
 
 	fd = open("test", O_RDONLY);
-	// fd = 0;
 	if (fd == -1)
 		return (1);
 	str = get_next_line(fd);

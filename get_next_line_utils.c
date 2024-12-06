@@ -6,7 +6,7 @@
 /*   By: nefimov <nefimov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:13:23 by nefimov           #+#    #+#             */
-/*   Updated: 2024/12/05 17:47:51 by nefimov          ###   ########.fr       */
+/*   Updated: 2024/12/06 13:00:52 by nefimov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,62 @@ char	*ft_strljoin(char *s1, char *s2, size_t size)
 	return (fd);
 }
 
-void    *ft_calloc(size_t nmemb, size_t size)
+char	*alloc_zero(void)
 {
-        void    *p;
-		char    *char_p;
-		size_t  i;
+	char	*p;
 
-        if ((size > 0) && (nmemb > SIZE_MAX / size))
-                return (NULL);
-        p = malloc(nmemb * size);
-        if (p == NULL)
-                return (NULL);
-        i = 0;
-        char_p = (char *)p;
-        while (i < nmemb)
-        {
-                char_p[i] = 0;
-                i++;
-        }
-        return (p);
+	p = (char *) malloc(1);
+	if (p == NULL)
+		return (NULL);
+	*p = '\0';
+	return (p);
+}
+
+int	check_init_buff(char *buff, ssize_t	fd)
+{
+	ssize_t	i;
+	ssize_t	rd;
+
+	if (fd < 0)
+		return (-1);
+	i = 0;
+	while (buff[i] == 0 && i < BUFFER_SIZE)
+		i++;
+	if (i == BUFFER_SIZE)
+	{
+		rd = read(fd, buff, BUFFER_SIZE);
+		if (rd == -1 || rd == 0)
+			return (-1);
+		i = 0;
+	}
+	return (i);
+}
+
+char	*read_new_line(ssize_t	i, char *buff, ssize_t	fd)
+{
+	char	*str;
+	ssize_t	start;
+	ssize_t	rd;
+
+	start = i;
+	str = alloc_zero();
+	while (buff[i] != '\n' && buff[i] != '\0')
+	{
+		if (++i == BUFFER_SIZE)
+		{
+			str = ft_strljoin(str, &buff[start], BUFFER_SIZE - start);
+			rd = read(fd, buff, BUFFER_SIZE);
+			if (rd == -1 || rd == 0)
+			{
+				if (*str)
+					return (str);
+				free(str);
+				return (NULL);
+			}
+			i = 0;
+			start = i;
+		}
+	}
+	str = ft_strljoin(str, &buff[start], (i - start + 1));
+	return (str);
 }

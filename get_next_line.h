@@ -6,7 +6,7 @@
 /*   By: nefimov <nefimov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 13:12:24 by nefimov           #+#    #+#             */
-/*   Updated: 2024/12/06 11:07:10 by nefimov          ###   ########.fr       */
+/*   Updated: 2024/12/06 12:58:38 by nefimov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,11 @@
 
 char	*get_next_line(int fd);
 
-size_t	ft_strlen(const char *s);
-char	*ft_strdup(const char *s);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
+int		check_init_buff(char *buff, ssize_t	fd);
+char	*read_new_line(ssize_t	i, char *buff, ssize_t	fd);
 
+size_t	ft_strlen(const char *s);
 char	*ft_strljoin(char *s1, char *s2, size_t size);
-void    *ft_calloc(size_t nmemb, size_t size);
+char	*alloc_zero(void);
 
 #endif
